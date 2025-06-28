@@ -220,26 +220,26 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-20"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-8 sm:pt-20 p-4"
         onClick={onClose}
       >
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-white rounded-3xl border border-gray-200 w-full max-w-4xl mx-4 max-h-[80vh] overflow-hidden shadow-2xl"
+          className="bg-white rounded-3xl border border-gray-200 w-full max-w-4xl max-h-[90vh] sm:max-h-[80vh] overflow-hidden shadow-2xl"
           onClick={e => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="p-6 border-b border-gray-200">
+          <div className="p-4 sm:p-6 border-b border-gray-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <div className="p-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl mr-3">
-                  <Sparkles className="w-6 h-6 text-white" />
+                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">AI-Powered Learning</h2>
-                  <p className="text-gray-600">Search anything and start learning instantly</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">AI-Powered Learning</h2>
+                  <p className="text-sm sm:text-base text-gray-600">Search anything and start learning instantly</p>
                 </div>
               </div>
               <button
@@ -252,14 +252,14 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
 
             {/* Search Input */}
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search any historical topic and start learning..."
-                className="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-lg"
+                className="w-full pl-10 sm:pl-12 pr-12 py-3 sm:py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base sm:text-lg"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && query.trim()) {
                     handleStartLearning(query.trim());
@@ -290,7 +290,7 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                     >
                       <div className="flex items-center">
                         <Search className="w-4 h-4 text-gray-400 mr-3" />
-                        <span className="text-gray-900">{suggestion}</span>
+                        <span className="text-gray-900 text-sm sm:text-base">{suggestion}</span>
                       </div>
                     </button>
                   ))}
@@ -308,18 +308,18 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                 <button
                   onClick={() => handleStartLearning(query.trim())}
                   disabled={isGeneratingContent}
-                  className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 disabled:opacity-50"
+                  className="w-full flex items-center justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
                 >
                   {isGeneratingContent ? (
                     <>
-                      <Loader className="w-5 h-5 mr-2 animate-spin" />
+                      <Loader className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-spin" />
                       Generating Learning Content...
                     </>
                   ) : (
                     <>
-                      <Play className="w-5 h-5 mr-2" />
+                      <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       Start Learning: "{query}"
-                      <ChevronRight className="w-5 h-5 ml-2" />
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                     </>
                   )}
                 </button>
@@ -328,12 +328,12 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
           </div>
 
           {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-96">
+          <div className="p-4 sm:p-6 overflow-y-auto max-h-96">
             {/* Loading State */}
             {isLoading && (
               <div className="flex items-center justify-center py-12">
-                <Loader className="w-8 h-8 text-indigo-600 animate-spin mr-3" />
-                <span className="text-gray-600">Searching historical knowledge...</span>
+                <Loader className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600 animate-spin mr-3" />
+                <span className="text-gray-600 text-sm sm:text-base">Searching historical knowledge...</span>
               </div>
             )}
 
@@ -342,10 +342,10 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-200"
+                className="mb-6 p-4 sm:p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-200"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">{selectedResult.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">{selectedResult.title}</h3>
                   <button
                     onClick={() => setSelectedResult(null)}
                     className="p-1 hover:bg-white/50 rounded-lg transition-colors"
@@ -360,19 +360,19 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                       <img
                         src={selectedResult.thumbnail.source}
                         alt={selectedResult.title}
-                        className="w-full h-32 object-cover rounded-xl"
+                        className="w-full h-24 sm:h-32 object-cover rounded-xl"
                       />
                     </div>
                   )}
                   
                   <div className={selectedResult.thumbnail ? 'md:col-span-2' : 'md:col-span-3'}>
-                    <p className="text-gray-700 mb-4 leading-relaxed">{selectedResult.extract}</p>
+                    <p className="text-gray-700 mb-4 leading-relaxed text-sm sm:text-base">{selectedResult.extract}</p>
                     
-                    <div className="flex items-center space-x-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                       <button
                         onClick={() => handleStartLearning(selectedResult.title)}
                         disabled={isGeneratingContent}
-                        className="flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm disabled:opacity-50"
+                        className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm disabled:opacity-50"
                       >
                         {isGeneratingContent ? (
                           <Loader className="w-4 h-4 mr-2 animate-spin" />
@@ -386,7 +386,7 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                         href={selectedResult.pageUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors text-sm"
+                        className="flex items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors text-sm"
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Wikipedia
@@ -406,31 +406,31 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
 
             {/* Search Results */}
             {!query && !isLoading && (
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 {/* How it Works */}
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
-                  <h3 className="text-lg font-semibold text-blue-900 mb-3 flex items-center">
-                    <Sparkles className="w-5 h-5 mr-2" />
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 sm:p-6 border border-blue-200">
+                  <h3 className="text-base sm:text-lg font-semibold text-blue-900 mb-3 flex items-center">
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     How AI Learning Works
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
                     <div className="text-center">
-                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Search className="w-6 h-6 text-blue-600" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Search className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                       </div>
                       <h4 className="font-medium text-blue-900 mb-1">1. Search Anything</h4>
                       <p className="text-blue-700">Type any historical topic, person, or event</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Brain className="w-6 h-6 text-purple-600" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                       </div>
                       <h4 className="font-medium text-blue-900 mb-1">2. AI Generates Content</h4>
                       <p className="text-blue-700">Creates timeline, quiz, and learning materials</p>
                     </div>
                     <div className="text-center">
-                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <Play className="w-6 h-6 text-green-600" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Play className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                       </div>
                       <h4 className="font-medium text-blue-900 mb-1">3. Start Learning</h4>
                       <p className="text-blue-700">Interactive timeline and knowledge quiz</p>
@@ -441,13 +441,13 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                 {/* Recent Searches */}
                 {recentSearches.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Searches</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Recent Searches</h3>
                     <div className="flex flex-wrap gap-2">
                       {recentSearches.map((search, index) => (
                         <button
                           key={index}
                           onClick={() => setQuery(search)}
-                          className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-sm transition-colors"
+                          className="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-xs sm:text-sm transition-colors"
                         >
                           {search}
                         </button>
@@ -458,11 +458,11 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
 
                 {/* Trending Topics */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <TrendingUp className="w-5 h-5 mr-2 text-orange-500" />
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-orange-500" />
                     Trending Historical Topics
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {trendingTopics.map((topic, index) => (
                       <motion.button
                         key={index}
@@ -470,15 +470,15 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.05 }}
                         onClick={() => handleStartLearning(topic)}
-                        className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-indigo-50 hover:to-purple-50 rounded-xl text-left transition-all duration-200 group border border-gray-200 hover:border-indigo-200"
+                        className="p-3 sm:p-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-indigo-50 hover:to-purple-50 rounded-xl text-left transition-all duration-200 group border border-gray-200 hover:border-indigo-200"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-medium text-gray-900 group-hover:text-indigo-700 transition-colors">
+                          <span className="font-medium text-gray-900 group-hover:text-indigo-700 transition-colors text-sm sm:text-base">
                             {topic}
                           </span>
                           <div className="flex items-center space-x-2">
-                            <Play className="w-4 h-4 text-gray-400 group-hover:text-green-600 transition-colors" />
-                            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 transition-colors" />
+                            <Play className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 group-hover:text-green-600 transition-colors" />
+                            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 group-hover:text-indigo-600 transition-colors" />
                           </div>
                         </div>
                       </motion.button>
@@ -491,7 +491,7 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
             {/* Search Results */}
             {query && results.length > 0 && !isLoading && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
                   Search Results ({results.length})
                 </h3>
                 <div className="space-y-3">
@@ -505,19 +505,19 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-indigo-200"
+                        className="p-3 sm:p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200 group border border-gray-200 hover:border-indigo-200"
                       >
-                        <div className="flex items-start space-x-4">
+                        <div className="flex items-start space-x-3 sm:space-x-4">
                           <div className={`p-2 rounded-xl ${colorClass}`}>
-                            <IconComponent className="w-4 h-4" />
+                            <IconComponent className="w-3 h-3 sm:w-4 sm:h-4" />
                           </div>
                           
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-1">
-                              <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors truncate">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-2">
+                              <h4 className="font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors truncate text-sm sm:text-base">
                                 {result.title}
                               </h4>
-                              <div className="flex items-center space-x-2 ml-2">
+                              <div className="flex items-center space-x-2">
                                 <span className="text-xs text-gray-500 capitalize bg-gray-200 px-2 py-1 rounded-full">
                                   {result.type}
                                 </span>
@@ -529,11 +529,11 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
                               </div>
                             </div>
                             
-                            <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                            <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 mb-3">
                               {result.description}
                             </p>
                             
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                               <div className="flex items-center space-x-2">
                                 <Star className="w-3 h-3 text-yellow-500" />
                                 <span className="text-xs text-gray-500">
@@ -574,15 +574,15 @@ export const SearchInterface: React.FC<SearchInterfaceProps> = ({
             {/* No Results */}
             {query && results.length === 0 && !isLoading && (
               <div className="text-center py-12">
-                <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
-                <p className="text-gray-600 mb-4">
+                <Search className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">No results found</h3>
+                <p className="text-gray-600 mb-4 text-sm sm:text-base">
                   Don't worry! Our AI can still create learning content for "{query}"
                 </p>
                 <button
                   onClick={() => handleStartLearning(query)}
                   disabled={isGeneratingContent}
-                  className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 disabled:opacity-50"
+                  className="px-4 sm:px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
                 >
                   {isGeneratingContent ? (
                     <>
