@@ -8,7 +8,8 @@ import {
   Brain,
   ArrowRight,
   RotateCcw,
-  Star
+  Star,
+  X
 } from 'lucide-react';
 import { QuizQuestion } from '../types';
 
@@ -95,37 +96,37 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl"
+          className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl"
         >
-          <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 ${
+          <div className={`inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full mb-4 sm:mb-6 ${
             score / questions.length >= 0.7 ? 'bg-green-100' : 'bg-blue-100'
           }`}>
-            <IconComponent className={`w-10 h-10 ${scoreMessage.color}`} />
+            <IconComponent className={`w-8 h-8 sm:w-10 sm:h-10 ${scoreMessage.color}`} />
           </div>
           
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
-          <p className={`text-lg mb-6 ${scoreMessage.color}`}>{scoreMessage.message}</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
+          <p className={`text-base sm:text-lg mb-4 sm:mb-6 ${scoreMessage.color}`}>{scoreMessage.message}</p>
           
-          <div className="bg-gray-50 rounded-2xl p-6 mb-6">
-            <div className="text-4xl font-bold text-gray-900 mb-2">
+          <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+            <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
               {score}/{questions.length}
             </div>
-            <div className="text-gray-600">
+            <div className="text-gray-600 text-sm sm:text-base">
               {Math.round((score / questions.length) * 100)}% Correct
             </div>
           </div>
           
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={restartQuiz}
-              className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+              className="flex-1 flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors text-sm sm:text-base"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
               Retry
             </button>
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 text-sm sm:text-base"
             >
               Continue Learning
             </button>
@@ -143,16 +144,16 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white rounded-3xl p-8 max-w-2xl w-full shadow-2xl"
+        className="bg-white rounded-3xl p-4 sm:p-8 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto"
       >
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-indigo-100 rounded-xl">
-              <Brain className="w-6 h-6 text-indigo-600" />
+              <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Knowledge Quiz</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">Knowledge Quiz</h2>
               <p className="text-sm text-gray-600">
                 Question {currentQuestion + 1} of {questions.length}
               </p>
@@ -166,15 +167,15 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-gray-400 hover:text-gray-600 transition-colors p-1"
             >
-              ✕
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2 mb-8">
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-6 sm:mb-8">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -183,7 +184,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
         </div>
 
         {/* Question */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center mb-4">
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
               question.difficulty === 'easy' ? 'bg-green-100 text-green-700' :
@@ -194,15 +195,15 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
             </span>
           </div>
           
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 leading-relaxed">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 leading-relaxed">
             {question.question}
           </h3>
         </div>
 
         {/* Options */}
-        <div className="space-y-3 mb-8">
+        <div className="space-y-3 mb-6 sm:mb-8">
           {question.options.map((option, index) => {
-            let buttonClass = "w-full p-4 text-left rounded-xl border-2 transition-all duration-200 ";
+            let buttonClass = "w-full p-3 sm:p-4 text-left rounded-xl border-2 transition-all duration-200 ";
             
             if (showExplanation) {
               if (index === question.correctAnswer) {
@@ -227,14 +228,14 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                 className={buttonClass}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-medium">{option}</span>
+                  <span className="font-medium text-sm sm:text-base">{option}</span>
                   {showExplanation && (
                     <div>
                       {index === question.correctAnswer && (
-                        <CheckCircle className="w-5 h-5 text-green-600" />
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                       )}
                       {index === selectedAnswer && index !== question.correctAnswer && (
-                        <XCircle className="w-5 h-5 text-red-600" />
+                        <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
                       )}
                     </div>
                   )}
@@ -250,10 +251,10 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6"
+              className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 sm:mb-6"
             >
-              <h4 className="font-semibold text-blue-900 mb-2">Explanation:</h4>
-              <p className="text-blue-800">{question.explanation}</p>
+              <h4 className="font-semibold text-blue-900 mb-2 text-sm sm:text-base">Explanation:</h4>
+              <p className="text-blue-800 text-sm sm:text-base">{question.explanation}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -264,7 +265,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             onClick={nextQuestion}
-            className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200"
+            className="w-full flex items-center justify-center px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 text-sm sm:text-base"
           >
             {currentQuestion < questions.length - 1 ? (
               <>
