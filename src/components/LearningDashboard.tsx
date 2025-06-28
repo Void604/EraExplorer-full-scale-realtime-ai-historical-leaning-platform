@@ -10,7 +10,10 @@ import {
   Award,
   Calendar,
   Brain,
-  Zap
+  Zap,
+  ArrowLeft,
+  Menu,
+  X
 } from 'lucide-react';
 import { LearningStats, UserProgress } from '../types';
 
@@ -34,6 +37,7 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
 
   const [dailyGoal, setDailyGoal] = useState(30); // minutes
   const [todayProgress, setTodayProgress] = useState(15);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Calculate stats from user progress
@@ -62,99 +66,124 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Learning Dashboard</h1>
-              <p className="text-gray-600">Track your historical learning journey</p>
+            <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
+              <button
+                onClick={onStartLearning}
+                className="flex items-center px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors text-sm sm:text-base"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Learning</span>
+                <span className="sm:hidden">Back</span>
+              </button>
+              
+              <div className="min-w-0 flex-1">
+                <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Learning Dashboard</h1>
+                <p className="text-sm sm:text-base text-gray-600 hidden sm:block">Track your historical learning journey</p>
+              </div>
             </div>
-            <button
-              onClick={onStartLearning}
-              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Continue Learning
-            </button>
+            
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <button
+                onClick={onStartLearning}
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg text-sm sm:text-base"
+              >
+                <span className="hidden sm:inline">Continue Learning</span>
+                <span className="sm:hidden">Learn</span>
+              </button>
+              
+              {/* Mobile Menu Button */}
+              <div className="sm:hidden">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                >
+                  {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 bg-blue-100 rounded-xl">
-                <BookOpen className="w-6 h-6 text-blue-600" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="p-2 sm:p-3 bg-blue-100 rounded-xl">
+                <BookOpen className="w-4 h-4 sm:w-6 sm:h-6 text-blue-600" />
               </div>
-              <span className="text-2xl font-bold text-gray-900">{stats.eventsCompleted}</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">{stats.eventsCompleted}</span>
             </div>
-            <h3 className="font-semibold text-gray-900">Events Completed</h3>
-            <p className="text-sm text-gray-600">Historical periods explored</p>
+            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Events Completed</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Historical periods explored</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 bg-green-100 rounded-xl">
-                <Trophy className="w-6 h-6 text-green-600" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="p-2 sm:p-3 bg-green-100 rounded-xl">
+                <Trophy className="w-4 h-4 sm:w-6 sm:h-6 text-green-600" />
               </div>
-              <span className="text-2xl font-bold text-gray-900">{stats.quizzesCompleted}</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">{stats.quizzesCompleted}</span>
             </div>
-            <h3 className="font-semibold text-gray-900">Quizzes Passed</h3>
-            <p className="text-sm text-gray-600">Knowledge assessments</p>
+            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Quizzes Passed</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Knowledge assessments</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 bg-orange-100 rounded-xl">
-                <Zap className="w-6 h-6 text-orange-600" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="p-2 sm:p-3 bg-orange-100 rounded-xl">
+                <Zap className="w-4 h-4 sm:w-6 sm:h-6 text-orange-600" />
               </div>
-              <span className="text-2xl font-bold text-gray-900">{stats.currentStreak}</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">{stats.currentStreak}</span>
             </div>
-            <h3 className="font-semibold text-gray-900">Learning Streak</h3>
-            <p className="text-sm text-gray-600">Consecutive days</p>
+            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Learning Streak</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Consecutive days</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-3 bg-purple-100 rounded-xl">
-                <Brain className="w-6 h-6 text-purple-600" />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className="p-2 sm:p-3 bg-purple-100 rounded-xl">
+                <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-purple-600" />
               </div>
-              <span className="text-2xl font-bold text-gray-900">{stats.knowledgeLevel}%</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">{stats.knowledgeLevel}%</span>
             </div>
-            <h3 className="font-semibold text-gray-900">Knowledge Level</h3>
-            <p className="text-sm text-gray-600">Overall progress</p>
+            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Knowledge Level</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Overall progress</p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Daily Goal */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900">Daily Goal</h3>
-              <Target className="w-5 h-5 text-indigo-600" />
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-bold text-gray-900">Daily Goal</h3>
+              <Target className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
             </div>
             
             <div className="mb-4">
@@ -162,9 +191,9 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
                 <span className="text-sm text-gray-600">Today's Progress</span>
                 <span className="text-sm font-medium text-gray-900">{todayProgress}/{dailyGoal} min</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
                 <div 
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 h-3 rounded-full transition-all duration-500"
+                  className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 sm:h-3 rounded-full transition-all duration-500"
                   style={{ width: `${Math.min(100, (todayProgress / dailyGoal) * 100)}%` }}
                 />
               </div>
@@ -202,14 +231,14 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900">Achievements</h3>
-              <Award className="w-5 h-5 text-yellow-600" />
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-bold text-gray-900">Achievements</h3>
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {achievements.map((achievement, index) => {
                 const IconComponent = achievement.icon;
                 return (
@@ -227,12 +256,12 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
                     <div className={`p-2 rounded-lg mr-3 ${
                       achievement.unlocked ? 'bg-yellow-100' : 'bg-gray-200'
                     }`}>
-                      <IconComponent className={`w-4 h-4 ${
+                      <IconComponent className={`w-3 h-3 sm:w-4 sm:h-4 ${
                         achievement.unlocked ? 'text-yellow-600' : 'text-gray-400'
                       }`} />
                     </div>
-                    <div className="flex-1">
-                      <h4 className={`font-medium ${
+                    <div className="flex-1 min-w-0">
+                      <h4 className={`font-medium text-sm sm:text-base ${
                         achievement.unlocked ? 'text-gray-900' : 'text-gray-500'
                       }`}>
                         {achievement.title}
@@ -244,7 +273,7 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
                       </p>
                     </div>
                     {achievement.unlocked && (
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full" />
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0" />
                     )}
                   </motion.div>
                 );
@@ -256,16 +285,16 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+            className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900">Learning Calendar</h3>
-              <Calendar className="w-5 h-5 text-green-600" />
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-bold text-gray-900">Learning Calendar</h3>
+              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
             </div>
             
             <div className="grid grid-cols-7 gap-1 mb-4">
               {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                <div key={day} className="text-center text-xs font-medium text-gray-500 p-2">
+                <div key={day} className="text-center text-xs font-medium text-gray-500 p-1 sm:p-2">
                   {day}
                 </div>
               ))}
@@ -292,10 +321,10 @@ export const LearningDashboard: React.FC<LearningDashboardProps> = ({
             <div className="flex items-center justify-between text-xs text-gray-600">
               <span>Less</span>
               <div className="flex space-x-1">
-                <div className="w-3 h-3 bg-gray-100 rounded-sm" />
-                <div className="w-3 h-3 bg-green-200 rounded-sm" />
-                <div className="w-3 h-3 bg-green-400 rounded-sm" />
-                <div className="w-3 h-3 bg-green-600 rounded-sm" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gray-100 rounded-sm" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-200 rounded-sm" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-sm" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-600 rounded-sm" />
               </div>
               <span>More</span>
             </div>
