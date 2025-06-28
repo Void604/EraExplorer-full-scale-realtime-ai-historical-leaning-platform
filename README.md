@@ -2,6 +2,8 @@
 
 > **A revolutionary educational platform that transforms ANY historical search into a comprehensive, interactive learning adventure — powered by real-time AI and Wikipedia.**
 
+# LIVE LINK:- https://eraexplorer.netlify.app/
+
 <p align="center">
   <a href="#-revolutionary-ai-learning-system"><img src="https://img.shields.io/badge/🚀-AI%20Learning%20System-6d28d9?style=for-the-badge&logo=openai&logoColor=white"></a>
   <a href="#-example-learning-journeys"><img src="https://img.shields.io/badge/🌟-Examples-f59e42?style=for-the-badge&logo=google-scholar&logoColor=white"></a>
